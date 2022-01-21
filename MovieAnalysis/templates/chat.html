@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    {% load static %}
+    {% csrf_token %}
+<title>ECharts 关系图</title>
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/echarts.js' %}"></script>
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet" type="text/css" media="all" />
+ <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+ <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<div class="bnt">
+  <div class="topbnt_left fl">
+   <ul><li><a href="../first/">行业分析</a></li>
+      <li><a href="../second/">趋势分析</a></li>
+      <li><a href="../third/">电影分析</a></li>
+
+   </ul>
+  </div>
+	<h1 style="color: rgba(255,255,255,1); " class="tith1 fl">问答机器人</h1>
+  <div class=" fr topbnt_right">
+    <ul>
+       <li><a href="../recommend/">个人推荐</a></li>
+        <li class="active"><a href="../chat/">问答机器人</a></li>
+       <li><a href='../zhishi/' >知识图谱</a></li>
+    </ul>
+  </div>
+</div>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>问答机器人</title>
+		<style type="text/css">
+		    span {
+		        background: url(../static/img/1.jpg);
+		        height: 40px;
+		        width: 40px;
+		        margin-left: 0px;
+				margin-top: 30px;
+		        float: left;
+	        }
+			span1 {
+		        background: url(../static/img/3.jfif);
+		        height: 40px;
+		        width: 40px;
+		        margin-left: 0px;
+				margin-top: 10px;
+		        float: left;
+	        }
+			.box{
+				background: url(../static/img/img.png) no-repeat;
+				width:1000px;
+				height:450px;
+				margin:0 auto;
+				border-top: 1000px;
+			}
+			.inTer{
+				width:920px;
+				height:330px;
+				border-top: 1000px;
+				margin:0 auto;
+				margin-top:10px;
+				overflow-y:auto;
+			}
+			textarea{
+			vertical-align: baseline;
+       			caret-color:#EB3142;
+				display:block;
+				width:920px;
+				height:65px;
+				margin:0 auto;
+				margin-top:5px;
+			}
+			#btn{
+				display:block;
+				float:right;
+				margin-right:10px;
+				margin-top:5px;
+			}
+			p{
+				display:inline-block;
+				border-radius:5px;
+				background:#8d8989;
+				font-size:16px;
+				padding:5px 5px;
+				margin:5px 0;
+				margin-left:5px;
+				margin-top: 40px;
+				max-width:340px;
+				word-wrap: break-word;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="inTer" id ="father">
+				    <span></span>
+					<p>你好</p><br/>
+			</div>
+			<textarea style="resize: none;" id="txt">
+			</textarea>
+			<button type="button" id="btn" class="btn btn-secondary"><i class="bi-check-lg"></i>发送</button>
+		</div>
+	</body>
+</html>
+<script>
+	var btn = document.getElementById("btn");
+	var txt = document.getElementById("txt");
+	var father = document.getElementById("father")
+	var p = document.getElementsByTagName("p");
+	var son = document.getElementsByTagName("span");
+	btn.onclick=function(){
+		if(txt.value==""){
+			alert("请勿发送空内容");
+		}
+		else{
+            $.ajax(
+                        {
+                        url: '/ajax_chat/',
+                        type: "POST",
+                            data: {
+                                    'csrfmiddlewaretoken': $("[name='csrfmiddlewaretoken']").val(),
+                                    'txt':txt.value,
+                         },
+                         success:function (data) {
+                            var data_txt=JSON.parse(data).txt;
+                            var a = document.createElement("span1");
+			father.appendChild(a);
+			a.scrollIntoView();
+			var son = document.createElement("p");
+			son.style.backgroundColor="yellowgreen";
+			son.style.clear="both";
+			// son.style.float="right";
+			son.style.marginLeft="5px";
+			son.style.marginTop="15px";
+			son.innerText=txt.value;
+			father.appendChild(son);
+			txt.value="";
+			son.scrollIntoView();
+			var b = document.createElement("br");
+			father.appendChild(b);
+			b.scrollIntoView();
+			var c=document.createElement("span");
+			father.appendChild(c);
+			c.scrollIntoView();
+			var reponse = document.createElement("p");
+			reponse.innerText=data_txt;
+			father.appendChild(reponse);
+			son.scrollIntoView();
+			var b = document.createElement("br");
+			father.appendChild(b);
+			b.scrollIntoView();
+
+                        },
+                       error:function (data){
+　　　　                   console.log("访问失败！")
+　　                    },
+                        }
+                );
+
+		}
+
+	}
+	// 	document.onkeydown=function(evt){
+	// 	var e = evt || event;
+	// 	e.keyCode=e.which=e.charCode;
+	// 	if(e.keyCode==13 || e.keyCode==10){
+	// 		if(txt.value==""){
+	// 			alert("请勿发送空内容");
+	// 		}
+	// 		else{
+	// 			var a = document.createElement("span1");
+	// 			father.appendChild(a);
+	// 			son.scrollIntoView();
+	// 			var son = document.createElement("p");
+	// 			son.style.backgroundColor="yellowgreen";
+	// 			son.style.clear="both";
+	// 			// son.style.float="right";
+	// 			son.style.marginLeft="5px";
+	// 			son.style.marginTop="15px";
+	// 			son.innerText=txt.value;
+	// 			father.appendChild(son);
+	// 			txt.value="";
+	// 			var b = document.createElement("br");
+	// 		    father.appendChild(b);
+	// 		    b.scrollIntoView();
+	// 			var c=document.createElement("span");
+	// 		    father.appendChild(c);
+	// 		    c.scrollIntoView();
+	// 		    var reponse = document.createElement("p");
+	// 		    reponse.innerText="你说的非常对";
+	// 		    father.appendChild(reponse);
+	// 		    son.scrollIntoView();
+	// 		    var b = document.createElement("br");
+	// 		    father.appendChild(b);
+	// 		    b.scrollIntoView();
+	// 		    }
+	// 	}
+	// }
+	</script>

@@ -1,0 +1,5 @@
+启动neo4j:
+管理员模式下CMD: neo4j.bat console
+
+启动django:
+python manage.py runserver

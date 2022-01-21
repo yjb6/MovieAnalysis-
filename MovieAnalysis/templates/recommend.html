@@ -1,0 +1,304 @@
+<!doctype html>
+    {% load static %}
+    {% csrf_token %}
+<meta charset="utf-8">
+<title>个性化推荐</title>
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet" type="text/css" media="all" />
+<script src="{% static 'js/echarts.min.js' %}"></script>
+
+
+<body>
+  <div class="wpbox">
+<div class="bnt">
+  <div class="topbnt_left fl">
+   <ul><li><a href="../first/">行业分析</a></li>
+      <li><a href="../second/">趋势分析</a></li>
+      <li><a href="../third/">电影分析</a></li>
+
+   </ul>
+  </div>
+  <h1 class="tith1 fl">个人推荐</h1>
+  <div class=" fr topbnt_right">
+    <ul>
+       <li  class="active"><a href="../recommend/">个性化推荐</a></li>
+        <li><a href="../chat/">问答机器人</a></li>
+       <li><a href="../zhishi/" >知识图谱</a></li>
+    </ul>
+
+  </div>
+</div>
+<!-- bnt end -->
+<style>
+  .yonghu{
+    font-size: 24px; color: rgba(255,255,255,1);  position: absolute;left: 30%;
+  }
+  .shurukuang{
+    font-size: 24px; color:black; position: absolute;margin-left: 200%;
+  }
+  .quedingkuang{
+    font-size: 20px;position: absolute;margin-left:400%;
+  }
+  #img01{
+  height:100%;
+    width:100%;
+  }
+    #img02{
+  height:100%;
+    width:100%;
+  }
+    #img03{
+  height:100%;
+    width:100%;
+  }
+    #img04{
+  height:100%;
+    width:100%;
+  }
+    #img05{
+  height:100%;
+    width:100%;
+  }
+  #img06{
+  height:100%;
+    width:100%;
+  }
+  #img07{
+  height:100%;
+    width:100%;
+  }
+  #img08{
+  height:100%;
+    width:100%;
+  }
+  #img09{
+  height:100%;
+    width:100%;
+  }
+  #img10{
+   height:100%;
+    width:100%;
+  }
+    #img11{
+  height:100%;
+    width:100%;
+  }
+    #img12{
+  height:100%;
+    width:100%;
+  }
+</style>
+<div class="puleftboxtmidd">
+  <h2 class="tith2">用户名登陆</h2>
+<div class="box pbox">
+  <ul class="yonghu">
+    <a>请输入用户名：</a>
+  <a><input class="shurukuang" type="text" id="txt"  name="condition" placeholder="请输入用户名">
+  <input class="quedingkuang" type="submit" id='btn' value="确定"></a>
+  </ul>
+   <script>
+     var oTxt = document.getElementById('txt');
+     var oBtn = document.getElementById('btn');
+     var url=[];
+     var i01=document.getElementById('img01');
+     var i02=document.getElementById('img02');
+     var i03=document.getElementById('img03');
+     var i04=document.getElementById('img04');
+     var i05=document.getElementById('img05');
+     var i06=document.getElementById('img06');
+     var i07=document.getElementById('img07');
+     var i08=document.getElementById('img08');
+     var i09=document.getElementById('img09');
+     var i10=document.getElementById('img10');
+     var i11=document.getElementById('img11');
+     var i12=document.getElementById('img12');
+     oBtn.addEventListener('click', function(){
+    //    list=fun_//得到电影推荐的电影名字，IMDbID,海报
+    $.ajax(
+                    {
+                    url: '/ajax_recommend/',
+                    type: "POST",
+                        data: {
+                                'csrfmiddlewaretoken': $("[name='csrfmiddlewaretoken']").val(),
+                                'uid':oTxt.value,
+                     },
+                     success:function (data) {
+                         console.log(JSON.parse(data));
+                      url=JSON.parse(data).url;
+                      var pic=JSON.parse(data).pic;
+                      i01.src=pic[0]
+
+                      i02.src=pic[1]
+
+                      i03.src=pic[2]
+
+                      i04.src=pic[3]
+
+                      i05.src=pic[4]
+
+                      i06.src=pic[5]
+
+                      i07.src=pic[6]
+
+                      i08.src=pic[7]
+
+                      i09.src=pic[8]
+
+                      i10.src=pic[9]
+
+                      i11.src=pic[10]
+
+                      i12.src=pic[11]
+                    },
+                   error:function (data){
+　　　　                   console.log("访问失败！")
+　　                    },
+                    }
+                    );
+     })
+   </script>
+</div>
+</div>
+<div class="puleftboxtbott">
+<h2 class="tith2 pt1">推荐电影展示</h2>
+ <div class="fl puleftboxtbott1" ><img id="img01" src=" https://m.media-amazon.com/images/M/MV5BOTUwODM5MTctZjczMi00OTk4LTg3NWUtNmVhMTAzNTNjYjcyXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg"  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img02" src=" https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img03" src=" https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img04" src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img05" src=" https://m.media-amazon.com/images/M/MV5BMGU2NzRmZjUtOGUxYS00ZjdjLWEwZWItY2NlM2JhNjkxNTFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img06" src=" https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img07" src="https://m.media-amazon.com/images/M/MV5BNTBmZWJkNjctNDhiNC00MGE2LWEwOTctZTk5OGVhMWMyNmVhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img08" src=" https://m.media-amazon.com/images/M/MV5BYmFmOGZjYTItYjY1ZS00OWRiLTk0NDgtMjQ5MzBkYWE2YWE0XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img09" src=" https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img10" src=" https://m.media-amazon.com/images/M/MV5BZjhkMDM4MWItZTVjOC00ZDRhLThmYTAtM2I5NzBmNmNlMzI1XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img11" src=" https://m.media-amazon.com/images/M/MV5BNDJiZDgyZjctYmRjMS00ZjdkLTkwMTEtNGU1NDg3NDQ0Yzk1XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <div class="fl puleftboxtbott1" ><img id="img12" src=" https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg "  alt="显示网络上的图片" /></div>
+ <script>
+     var i01=document.getElementById('img01');
+     var i02=document.getElementById('img02');
+     var i03=document.getElementById('img03');
+     var i04=document.getElementById('img04');
+     var i05=document.getElementById('img05');
+     var i06=document.getElementById('img06');
+     var i07=document.getElementById('img07');
+     var i08=document.getElementById('img08');
+     var i09=document.getElementById('img09');
+     var i10=document.getElementById('img10');
+     var i11=document.getElementById('img11');
+     var i12=document.getElementById('img12');
+   i01.addEventListener('click',function()
+   {
+     location.href=url[0]
+   })
+   i02.addEventListener('click',function()
+   {
+     location.href=url[1]
+   })
+   i03.addEventListener('click',function()
+   {
+     location.href=url[2]
+   })
+   i04.addEventListener('click',function()
+   {
+     location.href=url[3]
+   })
+   i05.addEventListener('click',function()
+   {
+     location.href=url[4]
+   })
+   i06.addEventListener('click',function()
+   {
+     location.href=url[5]
+   })
+   i07.addEventListener('click',function()
+   {
+     location.href=url[6]
+   })
+   i08.addEventListener('click',function()
+   {
+     location.href=url[7]
+   })
+   i09.addEventListener('click',function()
+   {
+     location.href=url[8]
+   })
+   i10.addEventListener('click',function()
+   {
+     location.href=url[9]
+   })
+   i11.addEventListener('click',function()
+   {
+     location.href=url[10]
+   })
+   i12.addEventListener('click',function()
+   {
+     location.href=url[11]
+   })
+  //  var img01=document.getElementById('img01');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    console.log(url)
+  //    img01.src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fj.xhd.cn%2Fu%2Fcms%2Fchongqing%2F201412%2F091608135n3i.jpg&refer=http%3A%2F%2Fj.xhd.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1630028468&t=bb153face5480345a2be11b3db9506b2"
+  //    // location.href="http://www.baidu.com"
+  //  })
+  //  var img02=document.getElementById('img02');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img03=document.getElementById('img03');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img04=document.getElementById('img04');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img05=document.getElementById('img05');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img06=document.getElementById('img06');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img07=document.getElementById('img07');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img08=document.getElementById('img08');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img09=document.getElementById('img09');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img10=document.getElementById('img10');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img01=document.getElementById('img11');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+  //  var img01=document.getElementById('img12');
+  //  img01.addEventListener('click',function()
+  //  {
+  //    location.href="http://www.baidu.com"
+  //  })
+ </script>
+</div>
+</div>
+
+</body>
+</html>

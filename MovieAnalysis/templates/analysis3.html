@@ -1,0 +1,609 @@
+﻿<!doctype html>
+    {% load static %}
+    {% csrf_token %}
+<meta charset="utf-8">
+<title>电影行业发展分析</title>
+<script src="{% static 'js/echarts.js' %}"></script>
+<script src="{% static 'js/world.js' %}"></script>
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet" type="text/css" media="all" />
+<script src="{% static 'js/beijing.js' %}" ></script>
+<script src="{% static 'js/jquery-3.2.0.min.js'%}" charset="utf-8"></script>
+<!--<script src="{% static 'js/world.js' %}" ></script>-->
+
+<body>
+  <div class="wpbox">
+    <div class="bnt">
+      <div class="topbnt_left fl">
+       <ul><li><a href="../first/">行业分析</a></li>
+          <li><a href="../second/">趋势分析</a></li>
+          <li class="active"><a href="../third/">电影分析</a></li>
+       </ul>
+      </div>
+      <h1 class="tith1 fl">优秀电影分析</h1>
+      <div class=" fr topbnt_right">
+        <ul>
+           <li><a href="../recommend/">个人推荐</a></li>
+           <li><a href="../chat/">问答机器人</a></li>
+           <li><a href="../zhishi/">知识图谱</a></li>
+        </ul>
+      </div>
+    </div>
+<!-- bnt end -->
+<div class="left1">
+    <div class="aleftboxttop pt1">
+      <h2 class="tith2">高分电影发行时间统计</h2>
+    <div id="aleftboxtmidd" class="aleftboxtbott_cont2" ></div>
+    </div>
+
+
+
+
+
+</div>
+<!--  left1 end -->
+
+
+
+
+<div class="mrbox">
+      <div class="mrbox_topmidd" style="width: 69%;">
+
+        <div class="amiddboxttop">
+              <h2 class="tith2 pt1">高分电影产地统计地图</h2>
+                <div class="hot_map" id="topmap"></div>
+        </div>
+
+
+            <!--  amiddboxttop end-->
+            <div class="amidd_bott">
+                  <div class="amiddboxtbott1 fl" >
+                    <h2 class="tith2 pt1">高分电影类型统计</h2>
+                    <div id="amiddboxtbott1" class="amiddboxtbott1content2" ></div>
+                  </div>
+
+                <!-- <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">高危车辆统计</h2>
+                    <div id="arightboxbott" class="amiddboxtbott2content"></div>
+                </div> -->
+
+          </div>
+            <!-- amidd_bott end -->
+      </div>
+
+
+
+        <!-- mrbox_top end -->
+        <div class="mrbox_top_right">
+          <div class="arightboxtop"><h2 class="tith2">高分电影时长统计</h2>
+            <div id="aleftboxtbott"  class="aleftboxtbott_contr"></div>
+          </div>
+            <!-- <div class="arightboxbott"><h2 class="tith2 ">今日新增驾驶人统计</h2>
+
+              <div id="aleftboxtmiddr" class="arightboxbottcont2"></div>
+            </div> -->
+        </div>
+        <!-- mrbox_top_right end -->
+      </div>
+
+    </div>
+
+
+
+//发行年份统计
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('aleftboxtmidd'));
+option = {
+  color:['#7ecef4'],
+  backgroundColor: 'rgba(1,202,217,.2)',
+  grid: {
+						left:20,
+						right:50,
+						top:23,
+						bottom:30,
+            containLabel: true
+					},
+
+        xAxis: {
+            type: 'value',
+            axisLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.2)'
+             }
+           },
+           splitLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,0)'
+             }
+           },
+           axisLabel:{
+               color:"rgba(255,255,255,1)"
+           },
+          //  data: [72,72,72,120,104,124,80],
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            axisLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.5)'
+             }
+           },
+           splitLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.1)'
+             }
+           },
+           axisLabel:{
+               color:"rgba(255,255,255,.5)"
+           },
+            data: ['-2002','2003-2005','2006-2008','2009-2011','2012-2014','2015-2017','2018-']
+        },
+        series: [
+            {
+                name: '2011年',
+                type: 'bar',
+                barWidth :30,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            1, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(230,253,139,.7)'},
+                                {offset: 1, color: 'rgba(41,220,205,.7)'}
+                            ]
+                        )
+                    }
+                },
+                data:  [72,72,72,120,104,124,80]
+            }
+        ]
+    };
+myChart.setOption(option);
+</script>
+
+//时长统计
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('aleftboxtbott'));
+option = {
+color:['#7ecef4'],
+  backgroundColor: 'rgba(1,202,217,.2)',
+  grid: {
+						left:20,
+						right:50,
+						top:23,
+						bottom:30,
+            containLabel: true
+					},
+
+        xAxis: {
+            type: 'value',
+            axisLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.2)'
+             }
+           },
+           splitLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,0)'
+             }
+           },
+           axisLabel:{
+               color:"rgba(255,255,255,1)"
+           },
+           data: ['1000','5000','10000','15000','20000','25000'],
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            axisLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.5)'
+             }
+           },
+           splitLine:{
+             lineStyle:{
+               color:'rgba(255,255,255,.1)'
+             }
+           },
+           axisLabel:{
+               color:"rgba(255,255,255,.5)"
+           },
+            data: ['0-30','30-60','60-90','90-120','120-150','150-180','180+']
+        },
+        series: [
+            {
+                name: '2011年',
+                type: 'bar',
+                barWidth :30,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            1, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(230,253,139,.7)'},
+                                {offset: 1, color: 'rgba(41,220,205,.7)'}
+                            ]
+                        )
+                    }
+                },
+                data: [19, 9, 27, 73, 42, 23,7]
+            }
+        ]
+    };
+myChart.setOption(option);
+</script>
+
+//类型统计
+<script type="text/javascript">
+  var myChart = echarts.init(document.getElementById('amiddboxtbott1'));
+  var data = [
+      [[28604,77,17099,'Australia',1990],[31163,77.4,2440,'Canada',1990],[1516,68,1605773,'China',1990],[13670,74.7,10082,'Cuba',1990],[28599,75,49805,'Finland',1990],[29476,77.1,569499,'France',1990],[31476,75.4,789237,'Germany',1990],[28666,78.1,254830,'Iceland',1990],[1777,57.7,870776,'India',1990],[29550,79.1,129285,'Japan',1990],[2076,67.9,201954,'North Korea',1990],[12087,72,42954,'South Korea',1990],[24021,75.4,33934,'New Zealand',1990],[43296,76.8,4240375,'Norway',1990],[10088,70.8,381958,'Poland',1990],[19349,69.6,1475652,'Russia',1990],[10670,67.3,53905,'Turkey',1990],[26424,75.7,57117,'United Kingdom',1990],[37062,75.4,252810,'United States',1990]],
+      [[44056,81.8,23973,'Australia',2015],[43294,81.7,35927,'Canada',2015],[13334,76.9,1376043,'China',2015],[21291,78.5,11562,'Cuba',2015],[38923,80.8,55057,'Finland',2015],[37599,81.9,64345,'France',2015],[44053,81.1,80545,'Germany',2015],[42182,82.8,329425,'Iceland',2015],[5903,66.8,1311027,'India',2015],[36162,83.5,126571,'Japan',2015],[1390,71.4,251317,'North Korea',2015],[34644,80.7,503439,'South Korea',2015],[34186,80.6,4528526,'New Zealand',2015],[64304,81.6,5210967,'Norway',2015],[24787,77.3,386194,'Poland',2015],[23038,73.13,143918,'Russia',2015],[19360,76.5,78630,'Turkey',2015],[38225,81.4,64715810,'United Kingdom',2015],[53354,79.1,321771,'United States',2015]]
+  ];
+  option = {
+    backgroundColor: 'rgba(1,202,217,.2)',
+    color: ['#FF9966', '#FFFFCC', '#0099CC', '#99CC33', '#99CCCC'],
+    tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c}个(占比{d}%)',
+        textStyle: {
+            fontSize: 15,
+        },
+    },
+    legend: {
+        data: ['奇幻', '爱情', '科幻', '动作', '喜剧','剧情','战争'],
+        orient: 'vertical',
+        right: '5%',
+        top: '13%',
+        top: 'center',
+        itemWidth: 20,
+        itemHeight: 20,
+        itemGap: 30,
+        textStyle: {
+            color: '#',
+            fontSize: 16,
+        },
+    },
+    grid: {
+        containLabel: true,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: '80px',
+    },
+    series: [
+        {
+            name: 'TITLE',
+            type: 'pie',
+            clockwise: false,
+            startAngle: 90,
+            radius: '70%',//图大小
+            //radius: ['60%', '70%'],//设置空心饼状图//分别是图形占画布大小及中心空的程度
+            center: ['41%', '50%'],//左右上下位置
+            hoverAnimation: false,
+            roseType: 'radius', //angle
+            data: [
+                {
+                    value: 40,
+                    name: '奇幻',
+                },
+                {
+                    value: 42,
+                    name: '爱情',
+                },
+                {
+                    value: 33,
+                    name: '科幻',
+                },
+                {
+                    value: 27,
+                    name:  '动作',
+                },
+                {
+                    value: 23,
+                    name: '喜剧',
+                },
+                {
+                    value: 19,
+                    name: '剧情',
+                },
+                {
+                    value: 9,
+                    name: '战争',
+                },
+            ],
+            itemStyle: {
+                //饼状图每一个项的间距
+                normal: {
+                    borderColor: '#273454',
+                    borderWidth: '5',
+                },
+            },
+            label: {
+                show: true,
+                position: 'outside',
+                formatter: '{a|{b}：{d}%}\n{hr|}',//{hr|}图例组件小圆点
+                rich: {
+                    hr: {
+                        backgroundColor: 't',//t小圆点颜色
+                        borderRadius: 100,
+                        width: 0,
+                        height: 10,
+                        padding: [3, 3, 0, -16],//？
+                        shadowColor: '#1c1b3a',//设置阴影样式
+                        shadowBlur: 1, //阴影模糊系数
+                        shadowOffsetX: '2',
+                        shadowOffsetY: '2',
+                    },
+                    a: {
+                        padding: [-35, 15, -20, 5],//？
+                    },
+                },
+            },
+            labelLine: {//项标注线
+                normal: {
+                    length: 20,
+                    length2: 30,
+                    lineStyle: {
+                        width: 1,
+                    },
+                },
+            },
+            // label: {//内部标注样式
+            //     normal: {
+            //         show: true,
+            //         position: 'inside',
+            //         formatter: '{d}%',
+            //         formatter: function(data){
+            //             return data.percent.toFixed(0)+"%";
+            //         },
+            //         textStyle : {
+            //             align : 'center',
+            //             baseline : 'middle',
+            //             fontFamily : '微软雅黑',
+            //             fontSize : 15,
+            //             fontWeight : 'bolder'
+            //         }
+            //     },
+            // },
+        },
+    ],
+
+  };
+  myChart.setOption(option);
+</script>
+
+
+
+
+
+//产地统计
+    <script type="text/javascript">
+    $(function(){
+        //使用echarts.init()方法初始化一个Echarts实例，在init方法中传入echarts map的容器 dom对象
+	var mapChart = echarts.init(document.getElementById('topmap'));
+	// mapChart的配置
+	var option = {
+		backgroundColor: 'rgba(1,202,217,.2)',
+            title: {
+                sublink: 'http://esa.un.org/wpp/Excel-Data/population.htm',
+                left: 'center',
+                top: 'top'
+            },
+           tooltip: {
+           /*鼠标滑过显示提示内容*/
+                trigger: 'item',
+                formatter: function (params) {
+                    var value = (params.value + '').split('.');
+                    value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')
+                            + '.' + value[1];
+                    return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                }
+            },
+            visualMap: {
+                min: 0,
+                max: 1000000,
+                text:['High','Low'],
+                realtime: false,
+                calculable: true,
+                color: ['orangered','yellow','lightskyblue']
+            },
+            series: [
+                {
+                    name: '高分电影数量',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    itemStyle:{
+                        emphasis:{label:{show:true}}
+                    },
+                    data: [
+                    {name: 'Afghanistan', value: 28397.812},
+                    {name: 'Angola', value: 19549.124},
+                    {name: 'Albania', value: 3150.143},
+                    {name: 'United Arab Emirates', value: 8441.537},
+                    {name: 'Argentina', value: 40374.224},
+                    {name: 'Armenia', value: 2963.496},
+                    {name: 'French Southern and Antarctic Lands', value: 268.065},
+                    {name: 'Australia', value: 22404.488},
+                    {name: 'Austria', value: 8401.924},
+                    {name: 'Azerbaijan', value: 9094.718},
+                    {name: 'Burundi', value: 9232.753},
+                    {name: 'Belgium', value: 10941.288},
+                    {name: 'Benin', value: 9509.798},
+                    {name: 'Burkina Faso', value: 15540.284},
+                    {name: 'Bangladesh', value: 151125.475},
+                    {name: 'Bulgaria', value: 7389.175},
+                    {name: 'The Bahamas', value: 66402.316},
+                    {name: 'Bosnia and Herzegovina', value: 3845.929},
+                    {name: 'Belarus', value: 9491.07},
+                    {name: 'Belize', value: 308.595},
+                    {name: 'Bermuda', value: 64.951},
+                    {name: 'Bolivia', value: 716.939},
+                    {name: 'Brazil', value: 195210.154},
+                    {name: 'Brunei', value: 27.223},
+                    {name: 'Bhutan', value: 716.939},
+                    {name: 'Botswana', value: 1969.341},
+                    {name: 'Central African Republic', value: 4349.921},
+                    {name: 'Canada', value: 34126.24},
+                    {name: 'Switzerland', value: 7830.534},
+                    {name: 'Chile', value: 17150.76},
+                    {name: 'China', value: 1359821.465},
+                    {name: 'Ivory Coast', value: 60508.978},
+                    {name: 'Cameroon', value: 20624.343},
+                    {name: 'Democratic Republic of the Congo', value: 62191.161},
+                    {name: 'Republic of the Congo', value: 3573.024},
+                    {name: 'Colombia', value: 46444.798},
+                    {name: 'Costa Rica', value: 4669.685},
+                    {name: 'Cuba', value: 11281.768},
+                    {name: 'Northern Cyprus', value: 1.468},
+                    {name: 'Cyprus', value: 1103.685},
+                    {name: 'Czech Republic', value: 10553.701},
+                    {name: 'Germany', value: 83017.404},
+                    {name: 'Djibouti', value: 834.036},
+                    {name: 'Denmark', value: 5550.959},
+                    {name: 'Dominican Republic', value: 10016.797},
+                    {name: 'Algeria', value: 37062.82},
+                    {name: 'Ecuador', value: 15001.072},
+                    {name: 'Egypt', value: 78075.705},
+                    {name: 'Eritrea', value: 5741.159},
+                    {name: 'Spain', value: 46182.038},
+                    {name: 'Estonia', value: 1298.533},
+                    {name: 'Ethiopia', value: 87095.281},
+                    {name: 'Finland', value: 5367.693},
+                    {name: 'Fiji', value: 860.559},
+                    {name: 'Falkland Islands', value: 49.581},
+                    {name: 'France', value: 63230.866},
+                    {name: 'Gabon', value: 1556.222},
+                    {name: 'United Kingdom', value: 62066.35},
+                    {name: 'Georgia', value: 4388.674},
+                    {name: 'Ghana', value: 24262.901},
+                    {name: 'Guinea', value: 10876.033},
+                    {name: 'Gambia', value: 1680.64},
+                    {name: 'Guinea Bissau', value: 10876.033},
+                    {name: 'Equatorial Guinea', value: 696.167},
+                    {name: 'Greece', value: 11109.999},
+                    {name: 'Greenland', value: 56.546},
+                    {name: 'Guatemala', value: 14341.576},
+                    {name: 'French Guiana', value: 231.169},
+                    {name: 'Guyana', value: 786.126},
+                    {name: 'Honduras', value: 7621.204},
+                    {name: 'Croatia', value: 4338.027},
+                    {name: 'Haiti', value: 9896.4},
+                    {name: 'Hungary', value: 10014.633},
+                    {name: 'Indonesia', value: 240676.485},
+                    {name: 'India', value: 1205624.648},
+                    {name: 'Ireland', value: 4467.561},
+                    {name: 'Iran', value: 240676.485},
+                    {name: 'Iraq', value: 30962.38},
+                    {name: 'Iceland', value: 318.042},
+                    {name: 'Israel', value: 7420.368},
+                    {name: 'Italy', value: 60508.978},
+                    {name: 'Jamaica', value: 2741.485},
+                    {name: 'Jordan', value: 6454.554},
+                    {name: 'Japan', value: 127352.833},
+                    {name: 'Kazakhstan', value: 15921.127},
+                    {name: 'Kenya', value: 40909.194},
+                    {name: 'Kyrgyzstan', value: 5334.223},
+                    {name: 'Cambodia', value: 14364.931},
+                    {name: 'South Korea', value: 51452.352},
+                    {name: 'Kosovo', value: 97.743},
+                    {name: 'Kuwait', value: 2991.58},
+                    {name: 'Laos', value: 6395.713},
+                    {name: 'Lebanon', value: 4341.092},
+                    {name: 'Liberia', value: 3957.99},
+                    {name: 'Libya', value: 6040.612},
+                    {name: 'Sri Lanka', value: 20758.779},
+                    {name: 'Lesotho', value: 2008.921},
+                    {name: 'Lithuania', value: 3068.457},
+                    {name: 'Luxembourg', value: 507.885},
+                    {name: 'Latvia', value: 2090.519},
+                    {name: 'Morocco', value: 31642.36},
+                    {name: 'Moldova', value: 103.619},
+                    {name: 'Madagascar', value: 21079.532},
+                    {name: 'Mexico', value: 117886.404},
+                    {name: 'Macedonia', value: 507.885},
+                    {name: 'Mali', value: 13985.961},
+                    {name: 'Myanmar', value: 51931.231},
+                    {name: 'Montenegro', value: 620.078},
+                    {name: 'Mongolia', value: 2712.738},
+                    {name: 'Mozambique', value: 23967.265},
+                    {name: 'Mauritania', value: 3609.42},
+                    {name: 'Malawi', value: 15013.694},
+                    {name: 'Malaysia', value: 28275.835},
+                    {name: 'Namibia', value: 2178.967},
+                    {name: 'New Caledonia', value: 246.379},
+                    {name: 'Niger', value: 15893.746},
+                    {name: 'Nigeria', value: 159707.78},
+                    {name: 'Nicaragua', value: 5822.209},
+                    {name: 'Netherlands', value: 16615.243},
+                    {name: 'Norway', value: 4891.251},
+                    {name: 'Nepal', value: 26846.016},
+                    {name: 'New Zealand', value: 4368.136},
+                    {name: 'Oman', value: 2802.768},
+                    {name: 'Pakistan', value: 173149.306},
+                    {name: 'Panama', value: 3678.128},
+                    {name: 'Peru', value: 29262.83},
+                    {name: 'Philippines', value: 93444.322},
+                    {name: 'Papua New Guinea', value: 6858.945},
+                    {name: 'Poland', value: 38198.754},
+                    {name: 'Puerto Rico', value: 3709.671},
+                    {name: 'North Korea', value: 1.468},
+                    {name: 'Portugal', value: 10589.792},
+                    {name: 'Paraguay', value: 6459.721},
+                    {name: 'Qatar', value: 1749.713},
+                    {name: 'Romania', value: 21861.476},
+                    {name: 'Russia', value: 21861.476},
+                    {name: 'Rwanda', value: 10836.732},
+                    {name: 'Western Sahara', value: 514.648},
+                    {name: 'Saudi Arabia', value: 27258.387},
+                    {name: 'Sudan', value: 35652.002},
+                    {name: 'South Sudan', value: 9940.929},
+                    {name: 'Senegal', value: 12950.564},
+                    {name: 'Solomon Islands', value: 526.447},
+                    {name: 'Sierra Leone', value: 5751.976},
+                    {name: 'El Salvador', value: 6218.195},
+                    {name: 'Somaliland', value: 9636.173},
+                    {name: 'Somalia', value: 9636.173},
+                    {name: 'Republic of Serbia', value: 3573.024},
+                    {name: 'Suriname', value: 524.96},
+                    {name: 'Slovakia', value: 5433.437},
+                    {name: 'Slovenia', value: 2054.232},
+                    {name: 'Sweden', value: 9382.297},
+                    {name: 'Swaziland', value: 1193.148},
+                    {name: 'Syria', value: 7830.534},
+                    {name: 'Chad', value: 11720.781},
+                    {name: 'Togo', value: 6306.014},
+                    {name: 'Thailand', value: 66402.316},
+                    {name: 'Tajikistan', value: 7627.326},
+                    {name: 'Turkmenistan', value: 5041.995},
+                    {name: 'East Timor', value: 10016.797},
+                    {name: 'Trinidad and Tobago', value: 1328.095},
+                    {name: 'Tunisia', value: 10631.83},
+                    {name: 'Turkey', value: 72137.546},
+                    {name: 'United Republic of Tanzania', value: 44973.33},
+                    {name: 'Uganda', value: 33987.213},
+                    {name: 'Ukraine', value: 46050.22},
+                    {name: 'Uruguay', value: 3371.982},
+                    {name: 'United States', value: 312247116},
+                    {name: 'Uzbekistan', value: 27769.27},
+                    {name: 'Venezuela', value: 236.299},
+                    {name: 'Vietnam', value: 89047.397},
+                    {name: 'Vanuatu', value: 236.299},
+                    {name: 'West Bank', value: 13.565},
+                    {name: 'Yemen', value: 22763.008},
+                    {name: 'South Africa', value: 51452.352},
+                    {name: 'Zambia', value: 13216.985},
+                    {name: 'Zimbabwe', value: 13076.978}
+                    ]
+                }
+            ]
+	};
+        //设置图表的配置项
+        mapChart.setOption(option);
+
+});
+</script>
+</body>
+
+
+</html>
